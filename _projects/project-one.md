@@ -3,6 +3,8 @@ title: "Structural Support Coordination for Drones using LLMs"
 abstract: "Autonomous drones that reinforce unstable structures by measuring what's actually standing, not what a blueprint says should be there — using an LLM to decide where help is needed most, tested on Jenga towers as a stand-in for real damaged structures."
 thumbnail: /assets/images/project-one/thumbnail.jpg
 order: 1
+featured: true
+hero_media: /assets/video/project-one-hero.mp4
 videos:
   - id: "YOUTUBE_VIDEO_ID"
     caption: "Demo 1a: Jenga-H 2 drone support."

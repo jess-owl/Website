@@ -5,6 +5,13 @@ description: >-
 baseurl: "/Website"
 url: ""
 
+author:
+  name: "Jess Morris"
+  role: "Lab for Engineering Safe Software (LESS), University of Virginia"
+  photo: /assets/images/profile/profile.jpg
+  cv: /assets/cv.pdf
+  email: "krw5eu@virginia.edu"
+
 # github-pages defaults to jekyll-theme-primer when this isn't set, which
 # silently overwrites assets/css/style.css with the theme's own stylesheet.
 theme: null

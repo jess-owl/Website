@@ -1,22 +1,66 @@
 ---
 layout: default
 ---
-<section class="intro">
-  {{ content }}
+{% assign featured = site.projects | where: 'featured', true | first %}
+
+{% if featured %}
+{% assign hero_ext = "" %}
+{% if featured.hero_media %}{% assign hero_ext = featured.hero_media | split: '.' | last | downcase %}{% endif %}
+<section class="hero">
+  {% if hero_ext == "mp4" or hero_ext == "webm" %}
+  <video class="hero-media" autoplay muted loop playsinline {% if featured.thumbnail %}poster="{{ featured.thumbnail | relative_url }}"{% endif %}>
+    <source src="{{ featured.hero_media | relative_url }}" type="video/{{ hero_ext }}">
+  </video>
+  {% elsif featured.hero_media %}
+  <img class="hero-media" src="{{ featured.hero_media | relative_url }}" alt="">
+  {% elsif featured.thumbnail %}
+  <img class="hero-media" src="{{ featured.thumbnail | relative_url }}" alt="">
+  {% endif %}
+  <div class="hero-scrim"></div>
+  <div class="hero-content wrap">
+    <span class="hero-eyebrow">Latest project</span>
+    <h1 class="hero-title"><a href="{{ featured.url | relative_url }}">{{ featured.title }}</a></h1>
+    {% if featured.abstract %}<p class="hero-abstract">{{ featured.abstract }}</p>{% endif %}
+    <a class="hero-cta" href="{{ featured.url | relative_url }}">View project &rarr;</a>
+  </div>
+</section>
+<p class="hero-byline wrap">{{ site.author.name }} &middot; {{ site.tagline }}</p>
+{% endif %}
+
+<section class="bio">
+  <div class="wrap bio-grid">
+    <div class="bio-photo">
+      <img src="{{ site.author.photo | relative_url }}" alt="{{ site.author.name }}" loading="lazy" onerror="this.style.display='none'">
+    </div>
+    <div class="bio-text">
+      <h2>{{ site.author.name }}</h2>
+      {% if site.author.role %}<p class="bio-role">{{ site.author.role }}</p>{% endif %}
+      {{ content }}
+      <div class="bio-links">
+        {% if site.author.cv %}<a class="bio-link" href="{{ site.author.cv | relative_url }}">CV</a>{% endif %}
+        {% if site.author.email %}<a class="bio-link" href="mailto:{{ site.author.email }}">Email</a>{% endif %}
+        {% if site.author.github %}<a class="bio-link" href="{{ site.author.github }}">GitHub</a>{% endif %}
+        {% if site.author.linkedin %}<a class="bio-link" href="{{ site.author.linkedin }}">LinkedIn</a>{% endif %}
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="project-grid">
-  {% assign projects = site.projects | sort: 'order' %}
-  {% for project in projects %}
-  <a class="project-card" href="{{ project.url | relative_url }}">
-    <div class="project-card-thumb">
-      <img src="{{ project.thumbnail | relative_url }}" alt="{{ project.title }}" loading="lazy">
-      <span class="project-card-overlay">View project &rarr;</span>
-    </div>
-    <div class="project-card-body">
-      <h2>{{ project.title }}</h2>
-      <p>{{ project.abstract }}</p>
-    </div>
-  </a>
-  {% endfor %}
+<section class="wrap">
+  <h2 class="section-heading">More projects</h2>
+  <div class="project-grid">
+    {% assign projects = site.projects | where_exp: "p", "p.featured != true" | sort: 'order' %}
+    {% for project in projects %}
+    <a class="project-card" href="{{ project.url | relative_url }}">
+      <div class="project-card-thumb">
+        <img src="{{ project.thumbnail | relative_url }}" alt="{{ project.title }}" loading="lazy">
+        <span class="project-card-overlay">View project &rarr;</span>
+      </div>
+      <div class="project-card-body">
+        <h2>{{ project.title }}</h2>
+        <p>{{ project.abstract }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
 </section>

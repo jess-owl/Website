@@ -25,6 +25,39 @@ A simple Jekyll site for sharing demo videos, pipeline images, and short write-u
 
 Both `videos` and `pipeline_images` are optional — the drone-cube-box project skips `videos` entirely since there's no demo clip for it yet.
 
+## Homepage: hero banner, bio, and project cards
+
+The homepage (`_layouts/home.html`) has three parts, top to bottom:
+
+1. **Hero banner** — full-width, shows whichever project has `featured: true` in its
+   front matter (only one project should have this set at a time; `project-one.md` has
+   it now). Also reads that project's `hero_media` front matter field for the
+   background:
+   - a path ending in `.mp4`/`.webm` renders as an autoplay/muted/looping background
+     video (needs a real file dropped in `assets/video/`; `project-one.md` currently
+     points at `assets/video/project-one-hero.mp4`, which doesn't exist yet — add the
+     real clip or swap the path to a `.gif`/`.jpg`/`.png` instead)
+   - any other extension (gif/jpg/png) renders as a plain background image
+   - if `hero_media` is omitted entirely, it falls back to the project's `thumbnail`
+   Your name only appears in a small byline strip under the hero, not in the top nav bar.
+2. **Bio section** — photo + name + role + the Markdown body of `index.md` (your
+   "about me" text) + CV/email/GitHub/LinkedIn links, pulled from the `author:` block
+   in `_config.yml`:
+   ```yaml
+   author:
+     name: "Jess Morris"
+     role: "Lab for Engineering Safe Software (LESS), University of Virginia"
+     photo: /assets/images/profile/profile.jpg   # drop a real photo here
+     cv: /assets/cv.pdf                           # drop your CV PDF here
+     email: "you@domain.edu"
+     # github: "https://github.com/..."           # optional, omit to hide the link
+     # linkedin: "https://linkedin.com/in/..."     # optional, omit to hide the link
+   ```
+   `github`/`linkedin` are commented out above — add them if/when you want those links
+   to show up; each link only renders if its field is set.
+3. **Project cards** — every project *except* the featured one (so it isn't shown
+   twice), same cards as before.
+
 ## Flexible layouts: rows and columns
 
 The `videos` and `pipeline_images` front matter give you a simple default (everything stacked, full width, one per row). When you want more control — two videos side by side, text next to a video instead of below it, a few images across — write it directly in the Markdown body using these grid classes:
