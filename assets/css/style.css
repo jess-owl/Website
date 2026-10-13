@@ -308,6 +308,14 @@ a:hover {
   margin-bottom: 32px;
 }
 
+.video-block {
+  margin-bottom: 24px;
+}
+
+.video-block:last-child {
+  margin-bottom: 0;
+}
+
 .video-wrapper {
   position: relative;
   width: 100%;
@@ -332,9 +340,48 @@ a:hover {
   margin: 0 0 24px;
 }
 
+.video-block .caption {
+  margin-bottom: 0;
+}
+
+/* Flexible rows for mixing videos, images, and text within a project write-up */
+.row {
+  display: grid;
+  gap: 24px;
+  margin: 0 0 32px;
+  align-items: start;
+}
+
+.row-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.row-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.row .span-2 {
+  grid-column: span 2;
+}
+
+@media (max-width: 640px) {
+  .row-2,
+  .row-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
 .project-body {
-  max-width: 720px;
   margin-bottom: 40px;
+}
+
+.project-body > p,
+.project-body > ul,
+.project-body > ol,
+.project-body > blockquote,
+.project-body > h2,
+.project-body > h3 {
+  max-width: 720px;
 }
 
 .project-body img {

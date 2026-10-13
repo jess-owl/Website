@@ -5,6 +5,10 @@ description: >-
 baseurl: "/Website"
 url: ""
 
+# github-pages defaults to jekyll-theme-primer when this isn't set, which
+# silently overwrites assets/css/style.css with the theme's own stylesheet.
+theme: null
+
 collections:
   projects:
     output: true

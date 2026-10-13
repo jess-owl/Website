@@ -9,10 +9,7 @@ layout: default
   {% if page.videos %}
   <section class="project-videos">
     {% for video in page.videos %}
-    <div class="video-wrapper">
-      <iframe src="https://www.youtube.com/embed/{{ video.id }}" title="{{ video.caption | default: page.title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-    </div>
-    {% if video.caption %}<p class="caption">{{ video.caption }}</p>{% endif %}
+    {% include video-embed.html id=video.id caption=video.caption %}
     {% endfor %}
   </section>
   {% endif %}
@@ -25,10 +22,7 @@ layout: default
   <section class="pipeline-images">
     <h2>Pipeline</h2>
     {% for img in page.pipeline_images %}
-    <figure>
-      <img src="{{ img.src | relative_url }}" alt="{{ img.caption | default: page.title }}" loading="lazy">
-      {% if img.caption %}<figcaption>{{ img.caption }}</figcaption>{% endif %}
-    </figure>
+    {% include pipeline-image.html src=img.src caption=img.caption %}
     {% endfor %}
   </section>
   {% endif %}

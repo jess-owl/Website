@@ -25,6 +25,41 @@ A simple Jekyll site for sharing demo videos, pipeline images, and short write-u
 
 Both `videos` and `pipeline_images` are optional — the drone-cube-box project skips `videos` entirely since there's no demo clip for it yet.
 
+## Flexible layouts: rows and columns
+
+The `videos` and `pipeline_images` front matter give you a simple default (everything stacked, full width, one per row). When you want more control — two videos side by side, text next to a video instead of below it, a few images across — write it directly in the Markdown body using these grid classes:
+
+- `row row-2` — two equal columns
+- `row row-3` — three equal columns
+- `row row-3` with `span-2` on one child — a two-thirds / one-third split (e.g. a wide video with a narrow text column beside it)
+
+Every column needs `markdown="1"` so Kramdown processes Markdown/Liquid inside it, and a `{% include video-embed.html id="..." caption="..." %}` to embed a video anywhere outside the automatic `videos` list. See [`_projects/project-one.md`](_projects/project-one.md) for a working example of each pattern. Basic shape:
+
+```html
+<div class="row row-2">
+  <div markdown="1">
+  {% include video-embed.html id="YOUTUBE_VIDEO_ID" caption="Angle one" %}
+  </div>
+  <div markdown="1">
+  {% include video-embed.html id="YOUTUBE_VIDEO_ID" caption="Angle two" %}
+  </div>
+</div>
+```
+
+Rows collapse back to a single column automatically on narrow (mobile) screens. Rows can hold anything — videos via the include, inline Markdown images (`![alt](path)`), or plain text — mixed in any combination. One formatting rule to keep in mind: inside each `markdown="1"` column, put the opening `<div>`, the content, and the closing `</div>` on **separate lines**. Kramdown won't reliably parse Markdown (like `![alt](path)`) written all on one line with the tags, e.g. this will NOT work:
+
+```html
+<!-- wrong — breaks -->
+<div markdown="1">![alt](path)</div>
+```
+
+```html
+<!-- right -->
+<div markdown="1">
+![alt](path)
+</div>
+```
+
 ## Editing the look
 
 - Colors live as CSS variables at the top of `assets/css/style.css` (`:root` for light, `:root[data-theme="dark"]` for dark).
