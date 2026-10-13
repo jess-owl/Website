@@ -1,0 +1,26 @@
+title: "Jess Morris"
+tagline: "Drone autonomy & testing"
+description: >-
+  Demo videos, pipelines, and notes from my work on autonomous drone systems.
+baseurl: ""
+url: ""
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+
+markdown: kramdown
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor

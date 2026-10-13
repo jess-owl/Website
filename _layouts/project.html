@@ -1,0 +1,35 @@
+---
+layout: default
+---
+<article class="project">
+  <a class="back-link" href="{{ '/' | relative_url }}">&larr; Back to all projects</a>
+  <h1>{{ page.title }}</h1>
+  {% if page.abstract %}<p class="project-abstract">{{ page.abstract }}</p>{% endif %}
+
+  {% if page.videos %}
+  <section class="project-videos">
+    {% for video in page.videos %}
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/{{ video.id }}" title="{{ video.caption | default: page.title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    </div>
+    {% if video.caption %}<p class="caption">{{ video.caption }}</p>{% endif %}
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  <div class="project-body">
+    {{ content }}
+  </div>
+
+  {% if page.pipeline_images %}
+  <section class="pipeline-images">
+    <h2>Pipeline</h2>
+    {% for img in page.pipeline_images %}
+    <figure>
+      <img src="{{ img.src | relative_url }}" alt="{{ img.caption | default: page.title }}" loading="lazy">
+      {% if img.caption %}<figcaption>{{ img.caption }}</figcaption>{% endif %}
+    </figure>
+    {% endfor %}
+  </section>
+  {% endif %}
+</article>
