@@ -2,7 +2,7 @@ title: "Jess Morris"
 tagline: "Drone autonomy & testing"
 description: >-
   Demo videos, pipelines, and notes from my work on autonomous drone systems.
-baseurl: ""
+baseurl: "/Website"
 url: ""
 
 collections:
